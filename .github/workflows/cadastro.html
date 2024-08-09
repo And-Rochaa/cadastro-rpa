@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Empresa - Xperiun</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 200px;
+        }
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #1E1E1E;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(105, 0, 255, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #f5d7c3;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #333333;
+            border-radius: 5px;
+            background-color: #2A2A2A;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        .checkbox-group, .radio-group {
+            margin-bottom: 15px;
+        }
+        .checkbox-group label, .radio-group label {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        .checkbox-group input, .radio-group input {
+            margin-right: 5px;
+        }
+        button {
+            width: 100%;
+            background-color: #6900FF;
+            color: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #5600D6;
+        }
+        #empresasCadastradas {
+            margin-top: 30px;
+            background-color: #1E1E1E;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #333333;
+        }
+        th {
+            background-color: #2A2A2A;
+            color: #f5d7c3;
+        }
+        #avisoSucesso {
+            display: none;
+            background-color: #6900FF;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2F381171b28d38c73d91f9165a37452a53.cdn.bubble.io%2Ff1702568537725x169493822276611800%2Fxperiun-logo01.png?w=192&h=47&auto=compress&dpr=1.25&fit=max" alt="Xperiun Logo">
+    </div>
+    <h1>Cadastro de Empresa</h1>
+    <form id="cadastroEmpresa">
+        <label for="nome">Nome da Empresa:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" id="cnpj" name="cnpj" required pattern="\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}">
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
+
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" required>
+
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado" required>
+            <option value="">Selecione</option>
+            <option value="SP">SP</option>
+            <option value="RJ">RJ</option>
+            <option value="MG">MG</option>
+        </select>
+
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" required pattern="\d{5}-\d{3}">
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required pattern="\(\d{2}\) \d{4,5}-\d{4}">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="setor">Setor:</label>
+        <input type="text" id="setor" name="setor" required>
+
+        <div class="checkbox-group">
+            <label>Serviços oferecidos:</label>
+            <label><input type="checkbox" name="servicos" value="consultoria"> Consultoria</label>
+            <label><input type="checkbox" name="servicos" value="desenvolvimento"> Desenvolvimento</label>
+            <label><input type="checkbox" name="servicos" value="treinamento"> Treinamento</label>
+        </div>
+
+        <div class="radio-group">
+            <label>Porte da empresa:</label>
+            <label><input type="radio" name="porte" value="pequena"> Pequena</label>
+            <label><input type="radio" name="porte" value="media"> Média</label>
+            <label><input type="radio" name="porte" value="grande"> Grande</label>
+        </div>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <div id="avisoSucesso">Cadastro realizado com sucesso!</div>
+
+    <div id="empresasCadastradas">
+        <h2>Empresas Cadastradas</h2>
+        <table id="tabelaEmpresas">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CNPJ</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Setor</th>
+                    <th>Serviços</th>
+                    <th>Porte</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- As empresas cadastradas serão inseridas aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('cadastroEmpresa').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Coletar dados do formulário
+            const nome = document.getElementById('nome').value;
+            const cnpj = document.getElementById('cnpj').value;
+            const cidade = document.getElementById('cidade').value;
+            const estado = document.getElementById('estado').value;
+            const setor = document.getElementById('setor').value;
+            
+            // Coletar serviços selecionados
+            const servicosSelecionados = Array.from(document.querySelectorAll('input[name="servicos"]:checked'))
+                .map(checkbox => checkbox.value)
+                .join(', ');
+            
+            // Coletar porte da empresa
+            const porteSelecionado = document.querySelector('input[name="porte"]:checked')?.value || 'Não especificado';
+
+            // Adicionar nova linha à tabela
+            const tabela = document.getElementById('tabelaEmpresas').getElementsByTagName('tbody')[0];
+            const novaLinha = tabela.insertRow();
+            novaLinha.innerHTML = `
+                <td>${nome}</td>
+                <td>${cnpj}</td>
+                <td>${cidade}</td>
+                <td>${estado}</td>
+                <td>${setor}</td>
+                <td>${servicosSelecionados}</td>
+                <td>${porteSelecionado}</td>
+            `;
+
+            // Mostrar aviso de sucesso
+            const avisoSucesso = document.getElementById('avisoSucesso');
+            avisoSucesso.style.display = 'block';
+            
+            // Esconder o aviso após 3 segundos
+            setTimeout(function() {
+                avisoSucesso.style.display = 'none';
+            }, 3000);
+
+            // Limpar o formulário
+            this.reset();
+
+            // Tornar visível a seção de empresas cadastradas
+            document.getElementById('empresasCadastradas').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
